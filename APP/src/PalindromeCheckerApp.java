@@ -1,6 +1,10 @@
+import java.util.*;
+
 public class PalindromeCheckerApp {
-    public static void main(String[] args) {
-        String input = "madam";
+    static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        System.out.print("Enter a string: ");
+        String input = scanner.nextLine();
         boolean isPalindrome = true;
 
         for(int i=0; i< input.length()/2; i++) {
@@ -10,10 +14,11 @@ public class PalindromeCheckerApp {
             }
         }
         if(isPalindrome) {
-            System.out.println(input + ": is it a palindrome? : true");
+            System.out.println(input + " is a palindrome");
         } else {
-            System.out.println(input + ": is it a palindrome? : false");
+            System.out.println(input + " is NOT a palindrome");
         }
+
 
     }
 }
