@@ -1,21 +1,32 @@
-import java.util.Scanner;
-import java.util.Stack;
-
 public class PalindromeCheckerApp {
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("String:");
-        String input = scanner.nextLine();
-        System.out.println("Palindrome?:");
-        PalindromeChecker checker = new PalindromeChecker();
-        System.out.println(checker.checkPalindrome(input));
-        scanner.close();
+
+        String input = "level";
+
+        PalindromeStrategy strategy = new StackStrategy();
+
+        boolean result = strategy.check(input);
+
+        System.out.println("Input : " + input);
+        System.out.println("Is Palindrome? : " + result);
     }
 }
 
-class PalindromeChecker {
-    public boolean checkPalindrome(String input) {
-        Stack<Character> stack = new Stack<>();
+interface PalindromeStrategy {
+    boolean check(String input);
+}
+
+class StackStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        if (input == null) {
+            return false;
+        }
+
+        java.util.Stack<Character> stack = new java.util.Stack<>();
+
         for (char c : input.toCharArray()) {
             stack.push(c);
         }
@@ -28,4 +39,4 @@ class PalindromeChecker {
 
         return true;
     }
-}//UC11
+}
