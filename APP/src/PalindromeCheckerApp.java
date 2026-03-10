@@ -4,12 +4,26 @@ public class PalindromeCheckerApp {
 
         String input = "level";
 
-        PalindromeStrategy strategy = new StackStrategy();
+        PalindromeStrategy stackStrategy = new StackStrategy();
+        PalindromeStrategy reverseStrategy = new ReverseStrategy();
 
-        boolean result = strategy.check(input);
+        long start1 = System.nanoTime();
+        boolean result1 = stackStrategy.check(input);
+        long end1 = System.nanoTime();
+
+        long start2 = System.nanoTime();
+        boolean result2 = reverseStrategy.check(input);
+        long end2 = System.nanoTime();
 
         System.out.println("Input : " + input);
-        System.out.println("Is Palindrome? : " + result);
+
+        System.out.println("\nStack Strategy:");
+        System.out.println("Is Palindrome? : " + result1);
+        System.out.println("Execution Time : " + (end1 - start1) + " ns");
+
+        System.out.println("\nReverse Strategy:");
+        System.out.println("Is Palindrome? : " + result2);
+        System.out.println("Execution Time : " + (end2 - start2) + " ns");
     }
 }
 
@@ -21,9 +35,7 @@ class StackStrategy implements PalindromeStrategy {
 
     public boolean check(String input) {
 
-        if (input == null) {
-            return false;
-        }
+        if (input == null) return false;
 
         java.util.Stack<Character> stack = new java.util.Stack<>();
 
@@ -38,5 +50,17 @@ class StackStrategy implements PalindromeStrategy {
         }
 
         return true;
+    }
+}
+
+class ReverseStrategy implements PalindromeStrategy {
+
+    public boolean check(String input) {
+
+        if (input == null) return false;
+
+        String reversed = new StringBuilder(input).reverse().toString();
+
+        return input.equals(reversed);
     }
 }
